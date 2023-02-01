@@ -1,8 +1,8 @@
 ﻿
 using System;
-using sp_mobile.Services;
-using sp_mobile.Models;
-using Xamarin.Forms;
+using sp_maui.Services;
+using sp_maui.Models;
+
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -10,14 +10,14 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using sp_mobile;
-using Syncfusion.XForms.PopupLayout;
+using sp_maui;
+//using Syncfusion.XForms.PopupLayout;
 
-namespace sp_mobile.ViewModels
+namespace sp_maui.ViewModels
 {
     public class ConnectionRequestViewModel : INotifyPropertyChanged
     {
-        private SfPopupLayout popupLayout;
+        //private SfPopupLayout popupLayout;
 
         public ICommand RefreshCommand { get; set; }
         public Command <ContactsModel> AcceptCommand { get; set; }
@@ -67,11 +67,11 @@ namespace sp_mobile.ViewModels
 
         public ConnectionRequestViewModel()
         {
-            popupLayout = new SfPopupLayout();
-            AcceptCommand = new Xamarin.Forms.Command<ContactsModel>(OnAcceptConnection);
-            RejectCommand = new Xamarin.Forms.Command<ContactsModel> (OnRejectConnection);
+           // popupLayout = new SfPopupLayout();
+            AcceptCommand = new Command<ContactsModel>(OnAcceptConnection);
+            RejectCommand = new Command<ContactsModel> (OnRejectConnection);
 
-            RefreshCommand = new Xamarin.Forms.Command (OnRefreshCommandExecuted);
+            RefreshCommand = new Command (OnRefreshCommandExecuted);
             _connectionsSvc = new ContactsModel();
             ConnectionRequests = new List<ContactsModel>();
             GetConnectionRequestsAsync();
@@ -92,7 +92,7 @@ namespace sp_mobile.ViewModels
 
         async Task GetConnectionRequestsAsync()
         {
-            string jwtToken = Application.Current.Properties["AccessToken"].ToString();
+            string jwtToken = Preferences.Get("AccessToken","").ToString();
             List<ContactsModel> rn = await GetMyConnectionRequests();
             ConnectionRequests = rn;
         }
@@ -100,10 +100,10 @@ namespace sp_mobile.ViewModels
         public async Task AcceptConnection(string connectionID)
         {
             Connections svc = new Connections();
-            string jwtToken = Application.Current.Properties["AccessToken"].ToString();
+            string jwtToken = Preferences.Get("AccessToken","").ToString();
             int memberID = 0;
-            if (Application.Current.Properties["UserID"].ToString() != null)
-                memberID = Convert.ToInt32(Application.Current.Properties["UserID"].ToString());
+            if (Preferences.Get("UserID","").ToString() != null)
+                memberID = Convert.ToInt32(Preferences.Get("UserID","").ToString());
 
             await svc.AcceptRequest (memberID.ToString(),connectionID, jwtToken);
 
@@ -112,10 +112,10 @@ namespace sp_mobile.ViewModels
         public async Task RejectConnection(string connectionID)
         {
             Connections svc = new Connections();
-            string jwtToken = Application.Current.Properties["AccessToken"].ToString();
+            string jwtToken = Preferences.Get("AccessToken","").ToString();
             int memberID = 0;
-            if (Application.Current.Properties["UserID"].ToString() != null)
-                memberID = Convert.ToInt32(Application.Current.Properties["UserID"].ToString());
+            if (Preferences.Get("UserID","").ToString() != null)
+                memberID = Convert.ToInt32(Preferences.Get("UserID","").ToString());
 
             await svc.RejectRequest (memberID.ToString(), connectionID, jwtToken);
 
@@ -124,10 +124,10 @@ namespace sp_mobile.ViewModels
         public async Task<List<ContactsModel>> GetMyConnectionRequests()
         {
             Connections svc = new Connections();
-            string jwtToken = Application.Current.Properties["AccessToken"].ToString();
+            string jwtToken = Preferences.Get("AccessToken","").ToString();
             int memberID = 0;
-            if (Application.Current.Properties["UserID"].ToString() != null)
-                memberID = Convert.ToInt32(Application.Current.Properties["UserID"].ToString());
+            if (Preferences.Get("UserID","").ToString() != null)
+                memberID = Convert.ToInt32(Preferences.Get("UserID","").ToString());
 
             List<ContactsModel> result = await svc.GetConnectionRequests  (memberID.ToString(), jwtToken);
 
@@ -139,6 +139,7 @@ namespace sp_mobile.ViewModels
                 int  i = 0;
                 foreach (var r in result)
                 {
+                    
                     string img = App.AppSettings.AppImagesURL + "images/members/default.png";
                     if (r.picturePath != null || r.picturePath != "")
                     {
@@ -173,33 +174,33 @@ namespace sp_mobile.ViewModels
                 return popupContent;
             });
 
-            popupLayout.PopupView.HeaderTitle = displayText;
-            popupLayout.PopupView.ContentTemplate = contentTemplateView;
-            popupLayout.PopupView.ShowFooter = true;
-            popupLayout.PopupView.ShowCloseButton = false;
-            popupLayout.PopupView.AutoSizeMode = AutoSizeMode.Height;
-            popupLayout.PopupView.AppearanceMode = AppearanceMode.TwoButton;
+            //popupLayout.PopupView.HeaderTitle = displayText;
+            //popupLayout.PopupView.ContentTemplate = contentTemplateView;
+            //popupLayout.PopupView.ShowFooter = true;
+            //popupLayout.PopupView.ShowCloseButton = false;
+            //popupLayout.PopupView.AutoSizeMode = AutoSizeMode.Height;
+            //popupLayout.PopupView.AppearanceMode = AppearanceMode.TwoButton;
 
-            //// Configure our Accept button   
-            popupLayout.PopupView.AcceptButtonText = accepttext;
-            popupLayout.PopupView.AcceptCommand = new Command(() =>
-            {
-                popupLayout.IsOpen = false;
-            });
-            popupLayout.PopupView.PopupStyle.AcceptButtonTextColor = Color.Black;
-            popupLayout.PopupView.PopupStyle.AcceptButtonBackgroundColor = Color.White;
+            ////// Configure our Accept button   
+            //popupLayout.PopupView.AcceptButtonText = accepttext;
+            //popupLayout.PopupView.AcceptCommand = new Command(() =>
+            //{
+            //    popupLayout.IsOpen = false;
+            //});
+            //popupLayout.PopupView.PopupStyle.AcceptButtonTextColor = Color.Black;
+            //popupLayout.PopupView.PopupStyle.AcceptButtonBackgroundColor = Color.White;
 
-            // Configure our Decline button   
-            popupLayout.PopupView.DeclineButtonText = declinetext;
-            popupLayout.PopupView.DeclineCommand = new Command(() =>
-            {
-                popupLayout.IsOpen = false;
-            });
-            popupLayout.PopupView.PopupStyle.DeclineButtonTextColor = Color.Black;
-            popupLayout.PopupView.PopupStyle.DeclineButtonBackgroundColor = Color.White;
+            //// Configure our Decline button   
+            //popupLayout.PopupView.DeclineButtonText = declinetext;
+            //popupLayout.PopupView.DeclineCommand = new Command(() =>
+            //{
+            //    popupLayout.IsOpen = false;
+            //});
+            //popupLayout.PopupView.PopupStyle.DeclineButtonTextColor = Color.Black;
+            //popupLayout.PopupView.PopupStyle.DeclineButtonBackgroundColor = Color.White;
 
-            // Show the popup and wait for user to close   
-            popupLayout.IsOpen = true;
+            //// Show the popup and wait for user to close   
+            //popupLayout.IsOpen = true;
         }
 
 

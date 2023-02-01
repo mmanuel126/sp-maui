@@ -1,19 +1,20 @@
 ﻿
 
-using sp_mobile.ViewModels;
-using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using sp_maui.ViewModels;
+using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
 
-namespace sp_mobile.Views
+namespace sp_maui.Views.Connection
 {
     public partial class ConnectionTabsPage : ContentPage
     {
         ConnectionTabsViewModel model = new ConnectionTabsViewModel();
+
         public ConnectionTabsPage()
         {
             InitializeComponent();
             this.BindingContext = model;
-            On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
+            On<iOS>().SetUseSafeArea(true);
 
         }
 

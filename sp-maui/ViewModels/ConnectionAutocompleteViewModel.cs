@@ -4,9 +4,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using sp_mobile.Models;
-using sp_mobile.Services;
-using Xamarin.Forms;
+using sp_maui.Models;
+using sp_maui.Services;
 
 //namespace sp_mobile.ViewModels
 //{
@@ -18,7 +17,7 @@ using Xamarin.Forms;
 //    }
 //}
 
-namespace sp_mobile.ViewModels
+namespace sp_maui.ViewModels
 {
     //public class Employee
     //{
@@ -84,7 +83,7 @@ namespace sp_mobile.ViewModels
             }
         }
 
-        public ConnectionAutocompleteViewModel()
+        public  ConnectionAutocompleteViewModel()
         {
             SendMessageCommand = new Command(OnSendMessageCommandAsync);
             GetConnectionsAsync();
@@ -104,23 +103,24 @@ namespace sp_mobile.ViewModels
 
         private async Task SendMessge(string connectionID, string msg, string subject)
         {
-            IsLoading = true;
-            Messages msgSvc = new Messages();
-            string jwtToken = Application.Current.Properties["AccessToken"].ToString();
-            string memberID = "0";
-            if (Application.Current.Properties["UserID"].ToString() != null)
-            {
-                memberID = Application.Current.Properties["UserID"].ToString();
-            }
-            await msgSvc.SendMessage(memberID, connectionID, subject, msg, jwtToken);
-            IsLoading = false;
-            await Application.Current.MainPage.Navigation.PopAsync();
+            //IsLoading = true;
+            //Messages msgSvc = new Messages();
+            //Preferences.Set("IsUserLogin", "true");
+            //string jwtToken = Preferences.Get("AccessToken","");
+            //string memberID = "0";
+            //if (Preferences.Get("UserID","") != null)
+            //{
+            //    memberID = Preferences.Get("UserID","").ToString();
+            //}
+            //await msgSvc.SendMessage(memberID, connectionID, subject, msg, jwtToken);
+            //IsLoading = false;
+            //await Application.Current.MainPage.Navigation.PopAsync();
         }
 
 
         async Task GetConnectionsAsync()
         {
-            string jwtToken = Application.Current.Properties["AccessToken"].ToString();
+            string jwtToken = Preferences.Get("AccessToken","").ToString();
             ObservableCollection<ContactsModel> rn = await GetAllConnectionAsync();
             ConnectionCollection = rn;
         }
@@ -128,10 +128,10 @@ namespace sp_mobile.ViewModels
         public async Task<ObservableCollection<ContactsModel>> GetAllConnectionAsync()
         {
             Connections svc = new Connections();
-            string jwtToken = Application.Current.Properties["AccessToken"].ToString();
+            string jwtToken = Preferences.Get("AccessToken","").ToString();
             int memberID = 0;
-            if (Application.Current.Properties["UserID"].ToString() != null)
-                memberID = Convert.ToInt32(Application.Current.Properties["UserID"].ToString());
+            if (Preferences.Get("UserID","").ToString() != null)
+                memberID = Convert.ToInt32(Preferences.Get("UserID","").ToString());
 
             ObservableCollection<ContactsModel> result =    await svc.GetMyConnectionsList(memberID.ToString(), jwtToken);
 

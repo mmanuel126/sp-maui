@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using sp_mobile.Models;
+using sp_maui.Models;
 
-using Xamarin.Forms;
-
-namespace sp_mobile.Views
+namespace sp_maui.Views.Connection
 {
     public partial class ConnectionPage : ContentPage
     {
@@ -22,10 +20,10 @@ namespace sp_mobile.Views
             var current = e.CurrentSelection; 
             ContactsModel nm = (ContactsModel)current[0];
             
-            Application.Current.Properties["ProfileID"] = nm.connectionID;
-            Application.Current.Properties["ProfileName"] = nm.friendName;
-            Application.Current.Properties["ProfileTitle"] = nm.titleDesc;
-            Application.Current.Properties["ProfileImage"] = nm.picturePath;
+           Preferences.Set("ProfileID",nm.connectionID);
+            Preferences.Set("ProfileName", nm.friendName);
+            Preferences.Set("ProfileTitle", nm.titleDesc);
+            Preferences.Set("ProfileImage", nm.picturePath);
            
             await Shell.Current.GoToAsync("profile");
         }

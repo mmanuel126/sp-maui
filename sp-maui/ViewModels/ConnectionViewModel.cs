@@ -1,8 +1,7 @@
 ﻿
 using System;
-using sp_mobile.Services;
-using sp_mobile.Models;
-using Xamarin.Forms;
+using sp_maui.Services;
+using sp_maui.Models;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -10,9 +9,9 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using sp_mobile;
+using sp_maui;
 
-namespace sp_mobile.ViewModels
+namespace sp_maui.ViewModels
 {
     public class ConnectionViewModel : INotifyPropertyChanged
     {
@@ -61,8 +60,8 @@ namespace sp_mobile.ViewModels
 
         public ConnectionViewModel()
         {
-            DropCommand = new  Xamarin.Forms.Command<ContactsModel>  (OnDropConnection);
-            RefreshCommand = new Xamarin.Forms.Command (OnRefreshCommandExecuted);
+            DropCommand = new  Command<ContactsModel>  (OnDropConnection);
+            RefreshCommand = new Command (OnRefreshCommandExecuted);
             _connectionsSvc = new ContactsModel();
             Connections = new List<ContactsModel>();
             GetConnectionsAsync();
@@ -78,7 +77,7 @@ namespace sp_mobile.ViewModels
 
         async Task GetConnectionsAsync()
         {
-            string jwtToken = Application.Current.Properties["AccessToken"].ToString();
+            string jwtToken = Preferences.Get("AccessToken","").ToString();
             List<ContactsModel> rn = await GetMyConnections();
             Connections = rn;
         }
@@ -86,10 +85,10 @@ namespace sp_mobile.ViewModels
         public async Task DeleteConnection(string connectionID)
         {
             Connections svc = new Connections();
-            string jwtToken = Application.Current.Properties["AccessToken"].ToString();
+            string jwtToken = Preferences.Get("AccessToken","").ToString();
             int memberID = 0;
-            if (Application.Current.Properties["UserID"].ToString() != null)
-                memberID = Convert.ToInt32(Application.Current.Properties["UserID"].ToString());
+            if (Preferences.Get("UserID","").ToString() != null)
+                memberID = Convert.ToInt32(Preferences.Get("UserID","").ToString());
 
             await svc.DeleteConnection (memberID.ToString(),connectionID, jwtToken);
 
@@ -98,10 +97,10 @@ namespace sp_mobile.ViewModels
         public async Task<List<ContactsModel>> GetMyConnections()
         {
             Connections svc = new Connections();
-            string jwtToken = Application.Current.Properties["AccessToken"].ToString();
+            string jwtToken = Preferences.Get("AccessToken","").ToString();
             int memberID = 0;
-            if (Application.Current.Properties["UserID"].ToString() != null)
-                memberID = Convert.ToInt32(Application.Current.Properties["UserID"].ToString());
+            if (Preferences.Get("UserID","").ToString() != null)
+                memberID = Convert.ToInt32(Preferences.Get("UserID","").ToString());
 
             List<ContactsModel> result = await svc.GetMyConnections (memberID.ToString(), jwtToken);
 

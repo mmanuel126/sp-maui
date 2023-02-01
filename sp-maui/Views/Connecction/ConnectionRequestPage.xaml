@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
-    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="sp_mobile.Views.ConnectionRequestPage"
-    xmlns:local="clr-namespace:sp_mobile.ViewModels"
-    xmlns:pull="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+    x:Class="sp_maui.Views.Connection.ConnectionRequestPage"
+    xmlns:local="clr-namespace:sp_maui.ViewModels"
     Title="Connections">
+
+    <!-- xmlns:pull="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"-->
 
     <ContentPage.BindingContext>
         <local:ConnectionRequestViewModel />
@@ -62,7 +63,7 @@
                 <Setter Property="Margin" Value="5" />
                 <Setter Property="Padding" Value="5" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-                <Setter Property="OutlineColor" Value="LightGray" />
+                <!-- Setter Property="OutlineColor" Value="LightGray" /-->
                 <Setter Property="BorderColor" Value="LightGray" />
                 <Setter Property="HasShadow" Value="True" />
             </Style>
@@ -85,7 +86,7 @@
 
         <Grid BackgroundColor="White" x:Name="AllContactsGrid">
 
-            <pull:SfPullToRefresh x:Name="pulltorefresh"
+            <!--pull:SfPullToRefresh x:Name="pulltorefresh"
                                     TransitionMode="Push" 
                                     PullingThreshold="100" 
                                     RefreshContentHeight="30"
@@ -94,7 +95,7 @@
                                     RefreshCommandParameter="{x:Reference collectionViewRq}"
                                     RefreshContentThreshold="40"
                                     RefreshContentWidth="30">
-                <pull:SfPullToRefresh.PullableContent>
+                <pull:SfPullToRefresh.PullableContent -->
 
                     <CollectionView ItemsSource="{Binding ConnectionRequests}"
                                   x:Name="collectionViewRq"
@@ -107,7 +108,7 @@
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-
+                        
                                 <SwipeView>
                                     <SwipeView.LeftItems>
                                         <SwipeItems >
@@ -155,8 +156,8 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                </pull:SfPullToRefresh.PullableContent>
-            </pull:SfPullToRefresh>
+                <!-- /pull:SfPullToRefresh.PullableContent>
+            </pull:SfPullToRefresh -->
 
         </Grid>
 
