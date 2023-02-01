@@ -30,22 +30,25 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+<<<<<<< HEAD
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
 	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	</PropertyGroup>
 
+=======
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
+>>>>>>> b010cae3571c244bf29e5e7863f6daa941a29bb6
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
-
-		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-
-		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
@@ -54,6 +57,79 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Syncfusion.Maui.Core" Version="20.4.44" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+		<PackageReference Include="RestSharp" Version="108.0.3" />
+		<PackageReference Include="Syncfusion.Maui.TabView" Version="20.4.44" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\dotnet_bot.svg" />
+	  <BundleResource Include="Resources\Splash\splash.svg" />
+	  <BundleResource Include="Resources\Images\accountsettings2.png" />
+	  <BundleResource Include="Resources\Images\addconnection.png" />
+	  <BundleResource Include="**/*" />
+	  <BundleResource Include="Resources\Images\*" />
+	  <BundleResource Include="**/*" />
+	  <BundleResource Include="Resources\Images\*" />
+	  <BundleResource Include="**/*" />
+	  <BundleResource Include="Resources\Images\*" />
+	  <BundleResource Include="**/*" />
+	  <BundleResource Include="Resources\Images\*" />
+	  <BundleResource Include="**/*" />
+	  <BundleResource Include="Resources\Images\*" />
+	  <BundleResource Include="**/*" />
+	  <BundleResource Include="Resources\Images\*" />
+	  <BundleResource Include="**/*" />
+	  <BundleResource Include="Resources\Images\*" />
+	  <BundleResource Include="**/*" />
+	  <BundleResource Include="Resources\Images\*" />
+	  <BundleResource Include="Resources\Images\edituser.jpeg" />
+	  <BundleResource Include="Resources\Images\edituser3.jpg" />
+	  <BundleResource Include="Resources\Images\icon_about.png" />
+	  <BundleResource Include="Resources\Images\icon_feed.png" />
+	  <BundleResource Include="Resources\Images\logo200.jpg" />
+	  <BundleResource Include="Resources\Images\logoff2.png" />
+	  <BundleResource Include="**/*" />
+	  <BundleResource Include="Resources\Images\*" />
+	  <BundleResource Include="Resources\Images\privacy2.png" />
+	  <BundleResource Include="Resources\Images\send.png" />
+	  <BundleResource Include="Resources\Images\settingsv2.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Syncfusion.Maui.Core" />
+	  <None Remove="Newtonsoft.Json" />
+	  <None Remove="RestSharp" />
+	  <None Remove="Resources\Splash\splash.svg" />
+	  <None Remove="Views\Connecction\" />
+	  <None Remove="Syncfusion.Maui.TabView" />
+	  <None Remove="Resources\Images\accountsettings2.png" />
+	  <None Remove="Resources\Images\addconnection.png" />
+	  <None Remove="Resources\Images\edituser.jpeg" />
+	  <None Remove="Resources\Images\edituser3.jpg" />
+	  <None Remove="Resources\Images\icon_about.png" />
+	  <None Remove="Resources\Images\icon_feed.png" />
+	  <None Remove="Resources\Images\logo200.jpg" />
+	  <None Remove="Resources\Images\logoff2.png" />
+	  <None Remove="Resources\Images\privacy2.png" />
+	  <None Remove="Resources\Images\send.png" />
+	  <None Remove="Resources\Images\settingsv2.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Views\Connecction\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Views\Connecction\ConnectionPage.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Connecction\ConnectionRequestPage.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Connecction\ConnectionTabsPage.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>

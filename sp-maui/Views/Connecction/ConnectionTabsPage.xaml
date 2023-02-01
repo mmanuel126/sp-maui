@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="sp_maui.Views.Connection.ConnectionTabsPage"
+    xmlns:controls="clr-namespace:sp_maui.Controls"
+    xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+    Title="Connections">
+
+
+   <Shell.SearchHandler>
+        <controls:SPSearchHandler Placeholder="Search..."
+         ShowsResults="true"
+         DisplayMemberName="Name" />
+    </Shell.SearchHandler>
+
+    <ContentPage.Content>
+    <tabView:SfTabView Items="{Binding Items}"  BackgroundColor="#E4E4E4">
+          
+         <!--tabView:SfTabView.SelectionIndicatorSettings>
+                <tabView:SelectionIndicatorSettings
+                    Color="Red" 
+                    Position="Bottom" 
+                    StrokeThickness="4"/>
+            </tabView:SfTabView.SelectionIndicatorSettings -->
+
+    </tabView:SfTabView>
+</ContentPage.Content>
+
+</ContentPage>

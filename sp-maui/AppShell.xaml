@@ -1,14 +1,170 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="sp_maui.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:sp_maui"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:controls="clr-namespace:sp_maui.Controls"
+    FlyoutBackgroundImageAspect="AspectFill" 
+    FlyoutHeaderBehavior="CollapseOnScroll"
+     xmlns:views="clr-namespace:sp_maui.Views"
+     xmlns:conViews="clr-namespace:sp_maui.Views.Connection"
+     >
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+<Shell.BackgroundColor>White</Shell.BackgroundColor>
+    <Shell.TitleColor>Red</Shell.TitleColor>
+    <Shell.ForegroundColor>Black</Shell.ForegroundColor>
 
+    <Shell.TabBarForegroundColor>Red</Shell.TabBarForegroundColor>
+    <Shell.TabBarTitleColor>Black</Shell.TabBarTitleColor>
+    
+
+    <Shell.FlyoutBackdrop>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Color="DarkGray"
+                          Offset="0.1" />
+            <GradientStop Color="Gray"
+                          Offset="0.6" />
+            <GradientStop Color="LightGray"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </Shell.FlyoutBackdrop>
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="Black" />
+                <Setter Property="Shell.ForegroundColor" Value="Black" />
+                <Setter Property="Shell.TitleColor" Value="Black" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="White" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="WhiteSmoke" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+
+
+            <Style TargetType="ShellItem"
+               BasedOn="{StaticResource BaseStyle}" />
+
+            <Style x:Key="NewsShell"
+               TargetType="Element"
+               BasedOn="{StaticResource BaseStyle}">
+                <Setter Property="Shell.BackgroundColor"
+                    Value="White" />
+            </Style>
+
+            <Style x:Key="TabShellStyle"
+               TargetType="Element"
+               BasedOn="{StaticResource BaseStyle}">
+                <Setter Property="Shell.BackgroundColor"
+                    Value="#f7f9fa" />
+            </Style>
+
+            <Style x:Key="ConnectionsShell"
+               TargetType="Element"
+               BasedOn="{StaticResource BaseStyle}">
+                <Setter Property="Shell.BackgroundColor"
+                    Value="#f7f9fa" />
+            </Style>
+
+            <Style x:Key="MessengerShell"
+               TargetType="Element"
+               BasedOn="{StaticResource BaseStyle}">
+                <Setter Property="Shell.BackgroundColor"
+                    Value="#f7f9fa" />
+            </Style>
+
+            <Style x:Key="ProfileShell"
+               TargetType="Element"
+               BasedOn="{StaticResource BaseStyle}">
+                <Setter Property="Shell.BackgroundColor"
+                    Value="#f7f9fa" />
+            </Style>
+
+            <Style x:Key="SettingsShell"
+               TargetType="Element"
+               BasedOn="{StaticResource BaseStyle}">
+                <Setter Property="Shell.BackgroundColor"
+                    Value="#f7f9fa" />
+            </Style>
+
+            <Style x:Key="AboutShell"
+               TargetType="Element"
+               BasedOn="{StaticResource BaseStyle}">
+                <Setter Property="Shell.BackgroundColor"
+                    Value="#96d1ff" />
+            </Style>
+
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <Shell.FlyoutHeader>
+        <controls:FlyoutHeader />
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <controls:FlyoutFooter></controls:FlyoutFooter>
+    </Shell.FlyoutFooter>
+
+
+    <FlyoutItem Title="ffff" FlyoutDisplayOptions="AsMultipleItems" >
+
+        <Tab Title="News" 
+             Icon="news.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:NewsPage}" />
+        </Tab>
+
+        <Tab Title="Posts" 
+             Icon="postv2.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+        </Tab>
+
+        <Tab Title="Connections" 
+             Icon="postv2.png">
+            <ShellContent  ContentTemplate="{DataTemplate conViews:ConnectionTabsPage}" />
+        </Tab>
+
+        <Tab Title="Messenger" 
+             Icon="postv2.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+        </Tab>
+
+        <Tab Title="View My Profile" FlyoutItemIsVisible="True"
+             Icon="postv2.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+        </Tab>
+
+        <Tab Title="Edit My Profile" FlyoutItemIsVisible="False"
+             Icon="postv2.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+        </Tab>
+
+        <Tab Title="Account Settings" FlyoutItemIsVisible="False"
+             Icon="postv2.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+        </Tab>
+
+        <Tab Title="Privacy Settings" FlyoutItemIsVisible="False"
+             Icon="postv2.png">
+            <ShellContent x:Name="privacyset"  ContentTemplate="{DataTemplate views:AboutPage}" />
+        </Tab>
+
+        <Tab Title="Logout" FlyoutItemIsVisible="False"
+             Icon="postv2.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+        </Tab>
+
+    </FlyoutItem>
+
+
+<!--ShellContent
+       Title="Home"
+       ContentTemplate="{DataTemplate views:NewsPage}"
+       Route="NewsPage"/-->
+
+   
 </Shell>
+
+
