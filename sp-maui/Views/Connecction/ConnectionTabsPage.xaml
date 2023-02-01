@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="sp_mobile.Views.ConnectionTabsPage"
+    xmlns:controls="clr-namespace:sp_mobile.Controls"
+    xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    Title="Connections">
+
+
+   <Shell.SearchHandler>
+        <controls:SPSearchHandler Placeholder="Search..."
+         ShowsResults="true"
+         DisplayMemberName="Name" />
+    </Shell.SearchHandler>
+
+    <tabView:SfTabView Items="{Binding Items}" EnableSwiping="False" BackgroundColor="#E4E4E4">
+
+        <tabView:SfTabView.SelectionIndicatorSettings>
+                <tabView:SelectionIndicatorSettings
+                    Color="Red" 
+                    Position="Bottom" 
+                    StrokeThickness="4"/>
+            </tabView:SfTabView.SelectionIndicatorSettings>
+
+    </tabView:SfTabView>
+
+</ContentPage>
