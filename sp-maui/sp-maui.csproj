@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>sp-maui</ApplicationTitle>
+		<ApplicationTitle>Sport Profiles</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.sp_maui</ApplicationId>
@@ -30,23 +30,19 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-<<<<<<< HEAD
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
 	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	</PropertyGroup>
 
-=======
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
-	  <CreatePackage>false</CreatePackage>
+	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+	  <ProvisioningType>automatic</ProvisioningType>
+	  <CodesignKey>iPhone Developer</CodesignKey>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
-	  <CreatePackage>false</CreatePackage>
-	</PropertyGroup>
->>>>>>> b010cae3571c244bf29e5e7863f6daa941a29bb6
+
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appicon.svg" Color="#512BD4" />
+		
 		<!-- Splash Screen -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiFont Include="Resources\Fonts\*" />
@@ -56,14 +52,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="4.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="1.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Syncfusion.Maui.Core" Version="20.4.44" />
+		<PackageReference Include="Syncfusion.Maui.Core" Version="20.4.48" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 		<PackageReference Include="RestSharp" Version="108.0.3" />
+		<PackageReference Include="Syncfusion.Maui.Inputs" Version="20.4.48" />
+		<PackageReference Include="Syncfusion.Maui.Maps" Version="20.4.48" />
 		<PackageReference Include="Syncfusion.Maui.TabView" Version="20.4.44" />
+		<PackageReference Include="System.Runtime.Caching" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\connections.png" />
 	  <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
 	</ItemGroup>
 	<ItemGroup>
@@ -95,15 +98,58 @@
 	  <BundleResource Include="Resources\Images\logoff2.png" />
 	  <BundleResource Include="**/*" />
 	  <BundleResource Include="Resources\Images\*" />
+	  <BundleResource Remove="Resources\AppIcon\logo.png" />
+	  <BundleResource Remove="Resources\AppIcon\siteico.png" />
+	  <BundleResource Remove="Resources\Images\connections.png" />
+	  <BundleResource Remove="Resources\Images\reject.png" />
+	  <BundleResource Remove="Resources\Images\reject2.png" />
+	  <BundleResource Remove="Resources\Images\removeconnection.png" />
+	  <BundleResource Remove="Resources\logo.png" />
+	  <BundleResource Remove="Resources\Splash\splash.svg" />
+	  <BundleResource Remove="ViewModels\MessageDetailsViewModel.cs" />
+	  <BundleResource Remove="ViewModels\MessageViewModel.cs" />
+	  <BundleResource Remove="ViewModels\ProfilePlaylistViewModel.cs" />
+	  <BundleResource Remove="ViewModels\ProfileVideoPlayerViewModel.cs" />
+	  <BundleResource Remove="ViewModels\ProfileViewModel.cs" />
+	  <BundleResource Remove="ViewModels\SettingsAccountViewModel.cs" />
+	  <BundleResource Remove="ViewModels\SettingsPrivacyViewModel.cs" />
+	  <BundleResource Remove="Views\MemberProfile\NewsPage.xaml.cs" />
+	  <BundleResource Remove="Views\MemberProfile\ProfileAddEducationPage - Copy.xaml.cs" />
+	  <BundleResource Remove="Views\MemberProfile\ProfileAddEducationPage.xaml" />
+	  <BundleResource Remove="Views\MemberProfile\ProfileEditPage.xaml" />
+	  <BundleResource Remove="Views\MemberProfile\ProfilePage - Copy.xaml.cs" />
+	  <BundleResource Remove="Views\MemberProfile\ProfilePage.xaml" />
+	  <BundleResource Remove="Views\MemberProfile\ProfilePage.xaml.cs" />
+	  <BundleResource Remove="Views\MemberProfile\ProfilePlaylistPage.xaml" />
+	  <BundleResource Remove="Views\MemberProfile\ProfileUpdateEducationPage.xaml" />
+	  <BundleResource Remove="Views\MemberProfile\ProfileVideoPlayerPage.xaml" />
+	  <BundleResource Remove="Views\Messages\MessageDetailsPage.xaml" />
+	  <BundleResource Remove="Views\Messages\MessageDetailsPage.xaml.cs" />
+	  <BundleResource Remove="Views\Messages\MessageNewPage.xaml" />
+	  <BundleResource Remove="Views\Messages\MessageNewPage.xaml.cs" />
+	  <BundleResource Remove="Views\Messages\MessagePage.xaml" />
+	  <BundleResource Remove="Views\Messages\NewsPage.xaml.cs" />
+	  <BundleResource Remove="Views\Settings\AccountSettingsPage - Copy.xaml.cs" />
+	  <BundleResource Remove="Views\Settings\AccountSettingsPage.xaml" />
+	  <BundleResource Remove="Views\Settings\LogoutPage.xaml" />
+	  <BundleResource Remove="Views\Settings\NewsPage.xaml.cs" />
+	  <BundleResource Remove="Views\Settings\PrivacySettingsPage.xaml" />
 	  <BundleResource Include="Resources\Images\privacy2.png" />
 	  <BundleResource Include="Resources\Images\send.png" />
 	  <BundleResource Include="Resources\Images\settingsv2.png" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\logo.png" />
+	  <None Remove="Resources\AppIcon\siteico.png" />
+	  <None Remove="Resources\Images\connections.png" />
+	  <None Remove="Resources\Images\reject.png" />
+	  <None Remove="Resources\Images\reject2.png" />
+	  <None Remove="Resources\Images\removeconnection.png" />
+	  <None Remove="Resources\logo.png" />
+	  <None Remove="Resources\Splash\splash.svg" />
 	  <None Remove="Syncfusion.Maui.Core" />
 	  <None Remove="Newtonsoft.Json" />
 	  <None Remove="RestSharp" />
-	  <None Remove="Resources\Splash\splash.svg" />
 	  <None Remove="Views\Connecction\" />
 	  <None Remove="Syncfusion.Maui.TabView" />
 	  <None Remove="Resources\Images\accountsettings2.png" />
@@ -119,7 +165,53 @@
 	  <None Remove="Resources\Images\settingsv2.png" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Content Include="Resources\Images\connections.png" />
+	  <Content Include="Resources\logo.png" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Folder Include="Views\Connecction\" />
+	  <Folder Include="Views\MyProfile\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="white" BaseSize="128,128" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Views\MemberProfile\ProfileUpdateEducationPage.xaml.cs">
+	    <DependentUpon>ProfileUpdateEducationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\MemberProfile\ProfileAddEducationPage.xaml.cs">
+	    <DependentUpon>ProfileAddEducationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\MemberProfile\ProfileEditPage.xaml.cs">
+	    <DependentUpon>ProfileEditPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\MemberProfile\ProfilePlaylistPage.xaml.cs">
+	    <DependentUpon>ProfilePlaylistPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\MemberProfile\ProfileVideoPlayerPage.xaml.cs">
+	    <DependentUpon>ProfileVideoPlayerPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\MemberProfile\ProfilePage.xaml.cs">
+	    <DependentUpon>ProfilePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Messages\MessagePage.xaml.cs">
+	    <DependentUpon>MessagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Messages\MessageNewPage.xaml.cs">
+	    <DependentUpon>MessageNewPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Messages\MessageDetailsPage.xaml.cs">
+	    <DependentUpon>MessageDetailsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Settings\LogoutPage.xaml.cs">
+	    <DependentUpon>LogoutPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Settings\PrivacySettingsPage.xaml.cs">
+	    <DependentUpon>PrivacySettingsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Settings\AccountSettingsPage.xaml.cs">
+	    <DependentUpon>AccountSettingsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="Views\Connecction\ConnectionPage.xaml">
@@ -130,6 +222,42 @@
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Connecction\ConnectionTabsPage.xaml">
 	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MemberProfile\ProfileUpdateEducationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MemberProfile\ProfileAddEducationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MemberProfile\ProfileEditPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MemberProfile\ProfilePlaylistPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MemberProfile\ProfileVideoPlayerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MemberProfile\ProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Messages\MessagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Messages\MessageNewPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Messages\MessageDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Settings\LogoutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Settings\PrivacySettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Settings\AccountSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 </Project>

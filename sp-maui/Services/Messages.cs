@@ -87,10 +87,10 @@ namespace sp_maui.Services
             {
                 if (string.IsNullOrEmpty(dynJson[i].senderImage))
                 {
-                    dynJson[i].senderImage = App.AppSettings.AppImagesURL + "images/members/default.png";
+                    dynJson[i].senderImage = App.AppSettings.AppImagesURL + "/images/members/default.png";
                 }
                 else {
-                    dynJson[i].senderImage = App.AppSettings.AppImagesURL + "images/members/" + dynJson[i].senderImage;
+                    dynJson[i].senderImage = App.AppSettings.AppImagesURL + "/images/members/" + dynJson[i].senderImage;
                 }
             }
             return dynJson;
@@ -120,11 +120,11 @@ namespace sp_maui.Services
             {
                 if (string.IsNullOrEmpty(dynJson[i].SenderPicture))
                 {
-                    dynJson[i].SenderPicture = App.AppSettings.AppImagesURL + "images/members/default.png";
+                    dynJson[i].SenderPicture = App.AppSettings.AppImagesURL + "/images/members/default.png";
                 }
                 else
                 {
-                    dynJson[i].SenderPicture = App.AppSettings.AppImagesURL + "images/members/" + dynJson[i].SenderPicture;
+                    dynJson[i].SenderPicture = App.AppSettings.AppImagesURL + "/images/members/" + dynJson[i].SenderPicture;
                 }
             }
             return dynJson;

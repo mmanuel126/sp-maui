@@ -1,10 +1,19 @@
-﻿namespace sp_maui;
+﻿using sp_maui.Views;
+namespace sp_maui;
 
 public partial class AppShell : Shell
 {
 	public AppShell()
 	{
-		InitializeComponent();
+        InitializeComponent();
+        Routing.RegisterRoute("profile", typeof(ProfilePage));
+        Routing.RegisterRoute("playlistvideos", typeof(ProfilePlaylistPage));
+        Routing.RegisterRoute("playlistvideoplayer", typeof(ProfileVideoPlayerPage)); 
+        Routing.RegisterRoute("messagedetails", typeof(MessageDetailsPage));
+        Routing.RegisterRoute("messagenew", typeof(MessageNewPage));
+       /* Routing.RegisterRoute("settingsedit", typeof(SettingsEditPage)); */
+       
+        
         /*Routing.RegisterRoute("profile", typeof(MainPage));
         Routing.RegisterRoute("playlistvideos", typeof(MainPage));
         Routing.RegisterRoute("playlistvideoplayer", typeof(MainPage));

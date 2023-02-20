@@ -13,7 +13,7 @@ public partial class ChangePasswordPage : ContentPage
         vm = new MemberViewModel();
 
         lblInstruction1.Text = "Please use the form below to change your password. It is required that you follow the guideline below:";
-        lblInstruction2.Text = "  Your new password must be between 5 - 12 characters in length.Use a combination of letters and numbers." +
+        lblInstruction2.Text = "Your new password must be between 5 - 12 characters in length.Use a combination of letters and numbers." +
                                " Passwords are case-sensitive.Remember to check your CAPS lock key.";
     }
 

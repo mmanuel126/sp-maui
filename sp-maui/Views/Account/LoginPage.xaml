@@ -2,26 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="sp_maui.Views.Account.LoginPage"
-             Title="LoginPage">
+             Title="">
 
     <AbsoluteLayout>
 
-        <StackLayout Padding="0, 50,0, 0" HorizontalOptions="CenterAndExpand" Orientation="Vertical"
+        <StackLayout Padding="0, 13,0, 0" HorizontalOptions="CenterAndExpand" Orientation="Vertical"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All">
 
-            <Image x:Name="imgLogo" Source="logo100.jpg" HeightRequest="50" WidthRequest="300" />
+            <Image x:Name="imgLogo" Source="logo100.jpg" HeightRequest="40" WidthRequest="160" />
 
             <Label x:Name="lblInst" Text="Please Login to your account below!"
                    HorizontalTextAlignment="Center"
                    FontAttributes="Bold" Padding="30,10,30,10"
-                   TextColor="Black" FontSize="17"/>
+                   TextColor="{StaticResource Gray500}" FontSize="17"/>
 
             <StackLayout Padding="30,10,30,10"
                          AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
                 <Entry 
-                    Text="" Placeholder="Enter email..." PlaceholderColor="Olive"
+                    Text="" Placeholder="Enter email..." PlaceholderColor="{StaticResource Gray400}"
                     x:Name="txtEmail"
                     Keyboard="Email" 
                     WidthRequest="300" />
@@ -29,7 +29,7 @@
 
             <StackLayout Padding="30,3,30,10">
                 <Entry 
-                    Text="" Placeholder="Enter password..." PlaceholderColor="Olive"
+                    Text="" Placeholder="Enter password..." PlaceholderColor="{StaticResource Gray400}" 
                     x:Name="txtPwd"
                     WidthRequest="300" Margin="10,0,10,0"
                     IsPassword="True" />
@@ -38,13 +38,13 @@
             <StackLayout Padding="30,10,30,10">
                 <Button x:Name="LoginButton"  FontSize="Medium"  WidthRequest="300"
                   Clicked="LoginButton_Clicked"
-                  TextColor="White"   CornerRadius="5" BackgroundColor="#3F51B5"
+                  TextColor="White"   CornerRadius="20" BackgroundColor="{StaticResource Blue100Accent}"
                   FlexLayout.AlignSelf="Stretch"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold" Text="Log In"/>
             </StackLayout>
 
             <StackLayout Padding="30,10,30,10">
 
-                <Label x:Name="ForgetLabel" Text="Forgot Password?" TextColor="Blue" FontSize="19" FontAttributes="Bold"
+                <Label x:Name="ForgetLabel" Text="Forgot Password?" TextColor="Blue" FontSize="17" FontAttributes="Bold"
                       HorizontalOptions="CenterAndExpand"
                       BackgroundColor="Transparent" FlexLayout.AlignSelf="End">
                     <Label.GestureRecognizers>
@@ -66,21 +66,21 @@
             <StackLayout Padding="30,10,30,10">
                 <Button x:Name="registerButton"  FontSize="Medium"  WidthRequest="300"
                 Clicked="RegisterButton_Clicked"
-                TextColor="White" BorderColor="Black" BackgroundColor="Green"  CornerRadius="5"
+                TextColor="White" BorderColor="Black" BackgroundColor="{StaticResource Blue100Accent}"  CornerRadius="20"
                 FlexLayout.AlignSelf="Stretch"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold" Text="Create New Account"/>
             </StackLayout>
 
             <StackLayout Padding="30,10,30,10">
 
                 <Label x:Name="lblAbout" Text="A sport social networking app for athletes, agents, and fans to connect." 
-                      HorizontalTextAlignment="Center" FontAttributes="Bold" Padding="30,20,30,10"
-                      TextColor="Black" FontSize="14"/>
+                      HorizontalTextAlignment="Center" FontAttributes="Bold" 
+                      TextColor="{StaticResource Gray500}" FontSize="14"/>
 
             </StackLayout>
             <StackLayout Padding="30,10,30,10">
-                <Label x:Name="lblCopyright" Text="© 2022 SportProfiles.net." 
-                      HorizontalTextAlignment="Center" FontAttributes="Bold" Padding="30,0,30,0"
-                      TextColor="Black" FontSize="14"/>
+                <Label x:Name="lblCopyright" Text="© 2000 SportProfiles.net." 
+                      HorizontalTextAlignment="Center" FontAttributes="Bold" 
+                      TextColor="{StaticResource Gray500}" FontSize="14"/>
             </StackLayout>
 
         </StackLayout>

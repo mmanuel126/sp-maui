@@ -140,10 +140,10 @@ namespace sp_maui.ViewModels
                 foreach (var r in result)
                 {
                     
-                    string img = App.AppSettings.AppImagesURL + "images/members/default.png";
+                    string img = App.AppSettings.AppImagesURL + "/images/members/default.png";
                     if (r.picturePath != null || r.picturePath != "")
                     {
-                        img = App.AppSettings.AppImagesURL + "images/members/" + r.picturePath;
+                        img = App.AppSettings.AppImagesURL + "/images/members/" + r.picturePath;
                     }
                     result[i].picturePath = img;
 

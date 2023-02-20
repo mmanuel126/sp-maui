@@ -2,21 +2,22 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="sp_maui.Views.Account.RegisterPage"
-             Title="RegisterPage">
+             Title=" ">
 
-    
      <AbsoluteLayout>
         
-        <StackLayout Padding="0, 8,0, 0" HorizontalOptions="CenterAndExpand" Orientation="Vertical"
+        <StackLayout Padding="0,0,0, 0" HorizontalOptions="CenterAndExpand" Orientation="Vertical"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All">
 
-        <ScrollView>
+            <ScrollView VerticalScrollBarVisibility="Always" VerticalOptions="FillAndExpand">
 
             <StackLayout>
-                <Label x:Name="lblInstruction" Text="It only takes a few seconds!" 
-                      HorizontalTextAlignment="Center" FontAttributes="None"  Padding="20,10,20,5"
-                      TextColor="Black" FontSize="15"/>
+                    <Image x:Name="imgLogo" Source="logo100.jpg" HeightRequest="40" WidthRequest="160" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                    <Label x:Name="lblInstruction" Text="Create Account below!" 
+                      HorizontalTextAlignment="Center" FontAttributes="Bold"  Padding="20,10,20,5" 
+                      TextColor="{StaticResource Gray500}" FontSize="17"/>
 
                 <StackLayout                
                     Grid.Row="2"
@@ -27,46 +28,46 @@
                     <StackLayout HorizontalOptions="Center" Spacing="1">
                         <Entry 
                         Text="" Placeholder="Enter first name..."
-                        Keyboard="Email" x:Name="FirstName" PlaceholderColor="Olive"
+                        Keyboard="Email" x:Name="FirstName" PlaceholderColor="{StaticResource Gray400}"
                         WidthRequest="300" />
                     </StackLayout>
 
                     <StackLayout HorizontalOptions="Center" Spacing="1">
                         <Entry x:Name="LastName"
-                        Text="" Placeholder="Enter last name..." PlaceholderColor="Olive"
+                        Text="" Placeholder="Enter last name..." PlaceholderColor="{StaticResource Gray400}"
                         WidthRequest="300" 
                          />
                     </StackLayout>
 
                     <StackLayout HorizontalOptions="Center" Spacing="1">
                         <Entry x:Name="Email"
-                        Text="" Placeholder="Enter email..." PlaceholderColor="Olive"
+                        Text="" Placeholder="Enter email..." PlaceholderColor="{StaticResource Gray400}"
                         WidthRequest="300" 
                         Keyboard="Email" />
                     </StackLayout>
 
                     <StackLayout HorizontalOptions="Center" Spacing="1">
                         <Entry x:Name="Pwd" IsTextPredictionEnabled="False"
-                        Text="" Placeholder="Enter password..." PlaceholderColor="Olive"
+                        Text="" Placeholder="Enter password..." PlaceholderColor="{StaticResource Gray400}"
                         WidthRequest="300"  Keyboard="Text"
                         IsPassword="True" />
                     </StackLayout>
 
                     <StackLayout HorizontalOptions="Center" Spacing="1">
                         <Entry x:Name="PwdReEntered"
-                        Text="" Placeholder="Enter password again..." PlaceholderColor="Olive"
+                        Text="" Placeholder="Enter password again..." PlaceholderColor="{StaticResource Gray400}"
                         WidthRequest="300" 
                         IsPassword="True" />
                     </StackLayout>
 
-                    <Picker x:Name="Gender" HorizontalOptions="FillAndExpand"  TitleColor="Olive"  Title="Tap to select gender...">
+                        <Picker x:Name="Gender" HorizontalOptions="FillAndExpand"  TitleColor="{StaticResource Gray400}"  Title="Tap to select gender...">
                         <!--Picker.Items>
                             <x:String>Male</x:String>
                             <x:String>Female</x:String>
                         </Picker.Items -->
                     </Picker>
 
-                    <Picker x:Name="ProfileType" HorizontalOptions="FillAndExpand" TitleColor="Olive" Title="Tap to select profile type...">
+                        <Picker x:Name="ProfileType" HorizontalOptions="FillAndExpand" TitleColor="{StaticResource Gray400}" Title="Tap to select profile type...">
                         <!-- Picker.Items>
                             <x:String>Agent</x:String>
                             <x:String>Athlete (Amateur)</x:String>
@@ -92,19 +93,19 @@
                     <StackLayout>
                         <Button x:Name="signUp"  FontSize="Medium"
                         Clicked="SignUpButton_Clicked"
-                        TextColor="White" BorderColor="Black" BackgroundColor="#00b33c"  CornerRadius="5" WidthRequest="300" 
+                        TextColor="White" BorderColor="Black" BackgroundColor="{StaticResource Blue100Accent}"  CornerRadius="20" WidthRequest="300" 
                         FlexLayout.AlignSelf="Stretch"  HorizontalOptions="CenterAndExpand" FontAttributes="Bold" Text="Create Account"/>
                     </StackLayout>
 
                     <StackLayout>
-                        <Label x:Name="regForgetLabel" Text="Recover Password" TextColor="Blue" FontSize="17"
+                        <Label x:Name="regForgetLabel" Text="Recover Password" TextColor="Blue" FontSize="15" FontAttributes="Bold"
                        HorizontalOptions="CenterAndExpand"
                        BackgroundColor="Transparent" FlexLayout.AlignSelf="End"/>
                     </StackLayout>
 
                 </StackLayout>
 
-                <Label x:Name="existingActLabel" Text="Already have Account?" TextColor="Blue" FontSize="18" HorizontalOptions="CenterAndExpand" Padding="30,10,30,10"/>
+                <Label x:Name="existingActLabel" Text="Already have Account?" TextColor="Blue" FontSize="15" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" Padding="30,10,30,10"/>
                 <Label Text=""></Label>
 
             </StackLayout>

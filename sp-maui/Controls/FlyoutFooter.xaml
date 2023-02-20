@@ -88,7 +88,8 @@
         </StackLayout>
             
         <StackLayout Margin="0,58,0,0">
-        <Label  Text="A sport social networking site for athletes, agents, and fanatics to connect." 
+          <Image x:Name="imgLogo20" Source="logo100.jpg" HeightRequest="20" WidthRequest="100" HorizontalOptions="Center" VerticalOptions="Center"/>
+          <Label  Text="A sport social networking site for athletes, agents, and fanatics to connect." 
                TextColor="Gray" 
                FontAttributes="Bold" FontSize="14"
                HorizontalTextAlignment="Center"

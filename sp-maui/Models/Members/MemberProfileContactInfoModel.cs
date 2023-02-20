@@ -15,10 +15,10 @@
         public string Neighborhood { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
-        public string ShowAddress { get; set; }
-        public string ShowEmailToMembers { get; set; }
-        public string ShowCellPhone { get; set; }
-        public string ShowHomePhone { get; set; }
+        public bool ShowAddress { get; set; }
+        public bool ShowEmailToMembers { get; set; }
+        public bool ShowCellPhone { get; set; }
+        public bool ShowHomePhone { get; set; }
         //public string ShowLinks { get; set; }
 
         public string Facebook { get; set; }

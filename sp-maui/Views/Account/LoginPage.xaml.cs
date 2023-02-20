@@ -13,6 +13,9 @@ namespace sp_maui.Views.Account
         public LoginPage()
         {
             InitializeComponent();
+            string year = DateTime.Now.Year.ToString();
+            lblCopyright.Text = "© " + year + " SportProfiles.net."; 
+
         }
 
         private async void OnTapGestureRecognizerTapped_ForgetLabel(object sender, EventArgs e)

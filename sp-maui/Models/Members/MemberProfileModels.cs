@@ -25,17 +25,17 @@ namespace sp_maui.Models
         public string InterestedInType { get; set; }
         public string JoinedDate { get; set; }
         public string LastName { get; set; }
-        public string LookingForEmployment { get; set; }
-        public string LookingForNetworking { get; set; }
-        public string LookingForPartnership { get; set; }
-        public string LookingForRecruitment { get; set; }
+        public bool LookingForEmployment { get; set; }
+        public bool LookingForNetworking { get; set; }
+        public bool LookingForPartnership { get; set; }
+        public bool LookingForRecruitment { get; set; }
         public string MemberID { get; set; }
         public string MiddleName { get; set; }
         public string PoliticalView { get; set; }
         public string ReligiousView { get; set; }
         public string Sex { get; set; }
-        public string ShowDOBType { get; set; }
-        public string ShowSexInProfile { get; set; }
+        public bool ShowDOBType { get; set; }
+        public bool ShowSexInProfile { get; set; }
         public string GetLGEntitiesCount { get; set; }
         public string Sport { get; set; }
 

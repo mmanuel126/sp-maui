@@ -38,6 +38,8 @@ namespace sp_maui.Services
         private static  readonly RestClient _rstClient = new RestClient(MEMBERS_SERVICE_URI);
         private static readonly RestClient _rstActClient = new RestClient(ACCOUNT_SERVICE_URI);
 
+        private static readonly HttpClient httpClient = new HttpClient();
+
         public Members()
         {
             
@@ -55,6 +57,11 @@ namespace sp_maui.Services
             _restConnectionClient.BaseAddress = new Uri(CONNECTION_SERVICE_URI);
             _restCommonClient.BaseAddress = new Uri(COMMON_SERVICE_URI);
             _restEventClient.BaseAddress = new Uri(EVENT_SERVICE_URI);
+
+            if (httpClient.BaseAddress == null)
+            {
+                httpClient.BaseAddress = new Uri(MEMBERS_SERVICE_URI);
+            }
         }
 
         /// <summary>
@@ -274,7 +281,7 @@ namespace sp_maui.Services
                 _restClient.DefaultRequestHeaders.Authorization
                        = new AuthenticationHeaderValue("Bearer", jwtToken);
 
-                var response = await _restClient.GetAsync("GetVideosList / " + playListID);
+                var response = await _restClient.GetAsync("GetVideosList/" + playListID);
                 var dynJson = await response.Content.ReadFromJsonAsync<List<YoutubeVideosListModel>>();
 
                 //var request = new RestRequest("GetVideosList/" + playListID, Method.Get);
@@ -300,94 +307,111 @@ namespace sp_maui.Services
         /// <param name="memberID">Member identifier.</param>
         public async Task<MemberProfileBasicInfoModel> GetMemberBasicInfo(int memberID, string jwtToken)
         {
-            _restClient.DefaultRequestHeaders.Authorization
-                       = new AuthenticationHeaderValue("Bearer", jwtToken);
-
-            var response = await _restClient.GetAsync("GetMemberGeneralInfoV2/" + memberID.ToString());
-            MemberProfileBasicInfoModel dynJson = await response.Content.ReadFromJsonAsync<MemberProfileBasicInfoModel>();
-
-
-            //MemberProfileBasicInfoModel lst = new MemberProfileBasicInfoModel();
-            //var request = new RestRequest("GetMemberGeneralInfoV2/" + memberID.ToString(), Method.Get);
-            ////request.AddHeader("Content-Type", "application/json; charset=utf-8");
-            //request.AddHeader("authorization", "Bearer " + jwtToken);
-
-            //RestResponse response =  await _restClient.ExecuteAsync(request);
-            //var content = response.Content;
-            //MemberProfileBasicInfoModel dynJson = JsonConvert.DeserializeObject<MemberProfileBasicInfoModel>(content);
-
-            dynJson.memberProfileTitle = dynJson.CurrentStatus;
-            dynJson.memProfileName = dynJson.FirstName + " " + dynJson.MiddleName + " " + dynJson.LastName;
-           
-            
-            if (String.IsNullOrEmpty (dynJson.memProfileImage))
+            try
             {
-                dynJson.memProfileImage = App.AppSettings.AppImagesURL + "images/members/default.png";
+                httpClient.DefaultRequestHeaders.Authorization
+                            = new AuthenticationHeaderValue("Bearer", jwtToken);
+
+                var rsp = await httpClient.GetAsync("GetMemberGeneralInfoV2/" + memberID.ToString());
+                var dynJson = await rsp.Content.ReadFromJsonAsync<MemberProfileBasicInfoModel>();
+                //return dynJson;
+
+                /*
+                _restClient.DefaultRequestHeaders.Authorization
+                           = new AuthenticationHeaderValue("Bearer", jwtToken);
+
+                var response = await _restClient.GetAsync("GetMemberGeneralInfoV2/" + memberID.ToString());
+                MemberProfileBasicInfoModel dynJson = await response.Content.ReadFromJsonAsync<MemberProfileBasicInfoModel>();
+                */
+
+                //MemberProfileBasicInfoModel lst = new MemberProfileBasicInfoModel();
+                //var request = new RestRequest("GetMemberGeneralInfoV2/" + memberID.ToString(), Method.Get);
+                ////request.AddHeader("Content-Type", "application/json; charset=utf-8");
+                //request.AddHeader("authorization", "Bearer " + jwtToken);
+
+                //RestResponse response =  await _restClient.ExecuteAsync(request);
+                //var content = response.Content;
+                //MemberProfileBasicInfoModel dynJson = JsonConvert.DeserializeObject<MemberProfileBasicInfoModel>(content);
+
+                dynJson.memberProfileTitle = dynJson.CurrentStatus;
+                dynJson.memProfileName = dynJson.FirstName + " " + dynJson.MiddleName + " " + dynJson.LastName;
+
+
+                if (String.IsNullOrEmpty(dynJson.memProfileImage))
+                {
+                    dynJson.memProfileImage = App.AppSettings.AppImagesURL + "images/members/default.png";
+                }
+                else
+                {
+                    dynJson.memProfileImage = App.AppSettings.AppImagesURL + "/" + dynJson.memProfileImage;
+                }
+
+                dynJson.memProfileDOB = dynJson.DOBMonth + "/" + dynJson.DOBDay + "/" + dynJson.DOBYear;
+
+
+                string str = "";
+                if (dynJson.LookingForEmployment)
+                    str = "Employment, ";
+
+                if (dynJson.LookingForNetworking)
+                    str += "Networking, ";
+
+                if (dynJson.LookingForPartnership)
+                    str += "Partnership, ";
+
+                if (dynJson.LookingForRecruitment)
+                    str += "Recruitment, ";
+
+                dynJson.memProfileLookingFor = str.TrimEnd().TrimEnd(',');
+
+                if (dynJson.InterestedInType == "8")
+                    dynJson.InterestedDesc = "Athletes and Sports";
+                else if (dynJson.InterestedInType == "9")
+                    dynJson.InterestedDesc = "Athletic Trainers";
+                else if (dynJson.InterestedInType == "39")
+                    dynJson.InterestedDesc = "Exercise Physiologists";
+                else if (dynJson.InterestedInType == "43")
+                    dynJson.InterestedDesc = "Fitness Entrepreneur";
+                else if (dynJson.InterestedInType == "90")
+                    dynJson.InterestedDesc = "Recreation Leader";
+                else if (dynJson.InterestedInType == "101")
+                    dynJson.InterestedDesc = "Sports Announcers";
+                else if (dynJson.InterestedInType == "102")
+                    dynJson.InterestedDesc = "Sports Coaches and Teachers";
+                else if (dynJson.InterestedInType == "103")
+                    dynJson.InterestedDesc = "Sportscaster";
+
+
+                //get youtube channel id
+                //MemberProfileBasicInfoModel lst = new MemberProfileBasicInfoModel();
+                //var request2 = new RestRequest("GetYoutubeChannel/" + memberID.ToString(), Method.Get);
+                //request2.AddHeader("Content-Type", "application/json; charset=utf-8");
+                //request2.AddHeader("authorization", "Bearer " + jwtToken);
+                
+                
+                var response2 = await _restClient.GetAsync("GetYoutubeChannel/" + memberID.ToString());
+                var result2 = await response2.Content.ReadAsStringAsync();
+              
+
+
+                //RestResponse response2 = await _restClient.ExecuteAsync(request2);
+                //var content2 = response2.Content;
+
+                //var result2 = JsonConvert.DeserializeObject<string>(content2).ToString();
+
+                var channelID = "";
+
+                if (result2 != null)
+                    channelID = result2;
+                dynJson.ChannelID = channelID;
+
+                return dynJson;
             }
-            else
+            catch (Exception x)
             {
-                dynJson.memProfileImage = App.AppSettings.AppImagesURL + "/" +  dynJson.memProfileImage;
+                var msg = x.Message;
+                return null; 
             }
-
-            dynJson.memProfileDOB = dynJson.DOBMonth + "/" + dynJson.DOBDay + "/" + dynJson.DOBYear;
-
-
-            string str = "";
-            if (dynJson.LookingForEmployment == "true")
-                str = "Employment, ";
-
-            if (dynJson.LookingForNetworking == "true")
-                str += "Networking, ";
-
-            if (dynJson.LookingForPartnership == "true")
-                str += "Partnership, ";
-
-            if (dynJson.LookingForRecruitment == "true")
-                str += "Recruitment, ";
-
-            dynJson.memProfileLookingFor = str.TrimEnd().TrimEnd(',') ;
-
-            if (dynJson.InterestedInType == "8")
-                dynJson.InterestedDesc = "Athletes and Sports";
-            else if (dynJson.InterestedInType == "9")
-                dynJson.InterestedDesc = "Athletic Trainers";
-            else if (dynJson.InterestedInType == "39")
-                dynJson.InterestedDesc = "Exercise Physiologists";
-            else if (dynJson.InterestedInType == "43")
-                dynJson.InterestedDesc = "Fitness Entrepreneur";
-            else if (dynJson.InterestedInType == "90")
-                dynJson.InterestedDesc = "Recreation Leader";
-            else if (dynJson.InterestedInType == "101")
-                dynJson.InterestedDesc = "Sports Announcers";
-            else if (dynJson.InterestedInType == "102")
-                dynJson.InterestedDesc = "Sports Coaches and Teachers";
-            else if (dynJson.InterestedInType == "103")
-                dynJson.InterestedDesc = "Sportscaster";
-
-
-            //get youtube channel id
-            //MemberProfileBasicInfoModel lst = new MemberProfileBasicInfoModel();
-            //var request2 = new RestRequest("GetYoutubeChannel/" + memberID.ToString(), Method.Get);
-            //request2.AddHeader("Content-Type", "application/json; charset=utf-8");
-            //request2.AddHeader("authorization", "Bearer " + jwtToken);
-
-            var response2 = await _restClient.GetAsync("GetYoutubeChannel/" + memberID.ToString());
-            var result2 = await response2.Content.ReadAsStringAsync();
-           
-
-
-            //RestResponse response2 = await _restClient.ExecuteAsync(request2);
-            //var content2 = response2.Content;
-
-            //var result2 = JsonConvert.DeserializeObject<string>(content2).ToString();
-
-            var channelID = "";
-
-            if (result2 != null)
-                channelID = result2;
-            dynJson.ChannelID = channelID;
-
-            return dynJson;
         }
 
         /// <summary>
@@ -446,13 +470,21 @@ namespace sp_maui.Services
         /// <param name="memberID">Member identifier.</param>
         public async Task<MemberProfileContactInfoModel> GetMemberContactInfo(int memberID, string jwtToken)
         {
-            _restClient.DefaultRequestHeaders.Authorization
-                         = new AuthenticationHeaderValue("Bearer", jwtToken);
+            try
+            {
+                _restClient.DefaultRequestHeaders.Authorization
+                             = new AuthenticationHeaderValue("Bearer", jwtToken);
 
-            string resource = "GetMemberContactInfo/" + memberID.ToString();
-            var response = await _restClient.GetAsync(resource);
-            var dynJson = await response.Content.ReadFromJsonAsync<MemberProfileContactInfoModel>();
-            return dynJson;
+                string resource = "GetMemberContactInfo/" + memberID.ToString();
+                var response = await _restClient.GetAsync(resource);
+                var dynJson = await response.Content.ReadFromJsonAsync<MemberProfileContactInfoModel>();
+                return dynJson;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return null;
+            }
 
             //var requestContent = new StringContent("Encoding.UTF8, application/json");
             //var response = await _restClient.PostAsync(resource, requestContent);
@@ -747,7 +779,7 @@ namespace sp_maui.Services
             body.Height = basicInfo.Height;
             body.Weight = basicInfo.Weight;
             body.Sex = basicInfo.Sex;
-            if (basicInfo.ShowSexInProfile == "1")
+            if (basicInfo.ShowSexInProfile)
                 body.ShowSexInProfile = true;
             else
                 body.ShowSexInProfile = false;
@@ -757,22 +789,22 @@ namespace sp_maui.Services
             body.DOBDay = basicInfo.DOBDay;
             body.DOBMonth = basicInfo.DOBMonth;
             body.DOBYear = basicInfo.DOBYear;
-            if (basicInfo.LookingForEmployment== "1")
+            if (basicInfo.LookingForEmployment)
               body.LookingForEmployment = true;
             else
                 body.LookingForEmployment = false;
 
-            if (basicInfo.LookingForNetworking == "1")
+            if (basicInfo.LookingForNetworking)
                 body.LookingForNetworking = true;
             else
                 body.LookingForNetworking = false;
 
-            if (basicInfo.LookingForPartnership == "1")
+            if (basicInfo.LookingForPartnership)
                 body.LookingForPartnership = true;
             else
                 body.LookingForPartnership = false;
 
-            if(basicInfo.LookingForRecruitment == "1")
+            if(basicInfo.LookingForRecruitment)
                 body.LookingForRecruitment = true;
             else
                 body.LookingForRecruitment = false;   
@@ -804,10 +836,10 @@ namespace sp_maui.Services
             query["HomePhone"]=  contactInfo.HomePhone;
             query["Instagram"]= contactInfo.Instagram;
             query["Neighborhood"] = contactInfo.Neighborhood;
-            query["ShowAddress"] = contactInfo.ShowAddress;
+          /*  query["ShowAddress"] = contactInfo.ShowAddress;
             query["ShowCellPhone"]= contactInfo.ShowCellPhone;
             query["ShowEmailToMembers"]= contactInfo.ShowEmailToMembers;
-            query["SbowHomePhone"]= contactInfo.ShowHomePhone;
+            query["SbowHomePhone"]= contactInfo.ShowHomePhone;*/
             query["State"]= contactInfo.State;
             query["Twitter"]= contactInfo.Twitter;
             query["Website"]= contactInfo.Website;

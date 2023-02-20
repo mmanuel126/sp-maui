@@ -6,9 +6,10 @@
     xmlns:controls="clr-namespace:sp_maui.Controls"
     FlyoutBackgroundImageAspect="AspectFill" 
     FlyoutHeaderBehavior="CollapseOnScroll"
-     xmlns:views="clr-namespace:sp_maui.Views"
-     xmlns:conViews="clr-namespace:sp_maui.Views.Connection"
-     >
+    xmlns:views="clr-namespace:sp_maui.Views"
+    xmlns:conViews="clr-namespace:sp_maui.Views.Connection"
+    Shell.NavBarIsVisible="True"
+    >
 
 <Shell.BackgroundColor>White</Shell.BackgroundColor>
     <Shell.TitleColor>Red</Shell.TitleColor>
@@ -43,7 +44,6 @@
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
             </Style>
-
 
             <Style TargetType="ShellItem"
                BasedOn="{StaticResource BaseStyle}" />
@@ -96,7 +96,6 @@
                 <Setter Property="Shell.BackgroundColor"
                     Value="#96d1ff" />
             </Style>
-
         </ResourceDictionary>
     </Shell.Resources>
 
@@ -108,9 +107,7 @@
         <controls:FlyoutFooter></controls:FlyoutFooter>
     </Shell.FlyoutFooter>
 
-
-    <FlyoutItem Title="ffff" FlyoutDisplayOptions="AsMultipleItems" >
-
+    <FlyoutItem Title="SportProfiles" FlyoutDisplayOptions="AsMultipleItems" >
         <Tab Title="News" 
              Icon="news.png">
             <ShellContent  ContentTemplate="{DataTemplate views:NewsPage}" />
@@ -122,38 +119,38 @@
         </Tab>
 
         <Tab Title="Connections" 
-             Icon="postv2.png">
+             Icon="profilev2.png">
             <ShellContent  ContentTemplate="{DataTemplate conViews:ConnectionTabsPage}" />
         </Tab>
 
-        <Tab Title="Messenger" 
-             Icon="postv2.png">
-            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+        <Tab Title="Messages" 
+             Icon="messengerv2.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:MessagePage}" />
         </Tab>
 
         <Tab Title="View My Profile" FlyoutItemIsVisible="True"
-             Icon="postv2.png">
-            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+             Icon="profilev2.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:ProfilePage}" />
         </Tab>
 
         <Tab Title="Edit My Profile" FlyoutItemIsVisible="False"
-             Icon="postv2.png">
-            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+             Icon="editprofile7.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:ProfileEditPage}" />
         </Tab>
 
         <Tab Title="Account Settings" FlyoutItemIsVisible="False"
-             Icon="postv2.png">
-            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+             Icon="accountsettings2.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:AccountSettingsPage}" />
         </Tab>
 
         <Tab Title="Privacy Settings" FlyoutItemIsVisible="False"
-             Icon="postv2.png">
-            <ShellContent x:Name="privacyset"  ContentTemplate="{DataTemplate views:AboutPage}" />
+             Icon="privacy3.png">
+            <ShellContent x:Name="privacyset"  ContentTemplate="{DataTemplate views:PrivacySettingsPage}" />
         </Tab>
 
         <Tab Title="Logout" FlyoutItemIsVisible="False"
-             Icon="postv2.png">
-            <ShellContent  ContentTemplate="{DataTemplate views:AboutPage}" />
+             Icon="logoff3.png">
+            <ShellContent  ContentTemplate="{DataTemplate views:LogoutPage}" />
         </Tab>
 
     </FlyoutItem>
